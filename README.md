@@ -29,3 +29,14 @@ The algorithm is split in 3 parts.
 Then we sort both list in Θ(n log(n)) as described above and we concatenate them without forgetting the sum element at the middle.
 
 It is just a sum of complexity, and so, the algorithm has complexity O(n log(n)).
+
+Improvement
+-------------
+
+I think we can improve the complexity or at least do less run in the tree by combination of operations. It would be more easy to do so if we had a another data structure but was not the case.
+
+Moreover, we can add typeclasses in order to add modularity and reusability.
+
+Finally, about the positive integers greater than 0, I did not have the time but the solution would be to catch non positive integers with Option or Either or we can use external library which give some tools to deal with refining types such as https://github.com/fthomas/refined. 
+
+EDIT : I did a version with Try[Int] but I can not deal with the tests. Tell me if you want it.
