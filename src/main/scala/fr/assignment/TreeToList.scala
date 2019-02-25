@@ -27,8 +27,8 @@ object TreeToList {
   def getEvenElements(tree: Tree[Int]): List[Int] =
     tree match {
       case Leaf => List()
-      case Branch(l, r, v) if v % 2 == 0 => v +: List.concat(getEvenElements(l), getEvenElements(r))
-      case Branch(l,r,_) => List.concat(getEvenElements(l), getEvenElements(r))
+      case Branch(l, r, v) if v % 2 == 0 => v +: getEvenElements(l) ::: getEvenElements(r)
+      case Branch(l,r,_) => getEvenElements(l) ::: getEvenElements(r)
     }
 
   /**
@@ -39,8 +39,8 @@ object TreeToList {
   def getOddElements(tree: Tree[Int]): List[Int] =
     tree match {
       case Leaf => List()
-      case Branch(l, r, v) if v % 2 != 0 => v +: List.concat(getOddElements(l), getOddElements(r))
-      case Branch(l,r,_) => List.concat(getOddElements(l), getOddElements(r))
+      case Branch(l, r, v) if v % 2 != 0 => v +: getOddElements(l) ::: getOddElements(r)
+      case Branch(l,r,_) => getOddElements(l) ::: getOddElements(r)
     }
 
   /** Generate a list of int from the tree with the following pattern :
@@ -52,7 +52,7 @@ object TreeToList {
     * @return the list
     */
   def oddSumEvenSortedList(tree : Tree[Int]) : List[Int] =
-    List.concat(getOddElements(tree).sortWith(_ < _) :+ sumTree(tree), getEvenElements(tree).sortWith(_ > _))
+    (getOddElements(tree).sortWith(_ < _) :+ sumTree(tree)) ::: getEvenElements(tree).sortWith(_ > _)
 
 
 }
